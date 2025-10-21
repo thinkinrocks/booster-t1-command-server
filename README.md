@@ -154,8 +154,6 @@ sudo systemctl restart booster-command-server
 sudo journalctl -u booster-command-server -f
 ```
 
-See [SYSTEMD_DEPLOYMENT.md](booster-command-server/SYSTEMD_DEPLOYMENT.md) for detailed deployment instructions.
-
 ## Project Structure
 
 ```
