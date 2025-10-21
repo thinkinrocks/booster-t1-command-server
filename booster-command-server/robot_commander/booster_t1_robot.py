@@ -23,6 +23,9 @@ class BoosterT1Commander(RobotCommander):
     def busy(self) -> bool:
         return self.busy_lock.locked()
 
+    def name(self) -> str:
+        return "booster_t1"
+
     async def _process_next_command(self):
         """Process the next command from the queue if available."""
         if not self.command_queue.empty():
