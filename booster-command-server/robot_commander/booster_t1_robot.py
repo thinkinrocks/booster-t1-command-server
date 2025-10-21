@@ -127,7 +127,7 @@ class BoosterT1Commander(RobotCommander):
         """Internal method that executes turn_left with the busy_lock."""
         async with self.busy_lock:
             self.logger.debug("Turning left")
-            result = self.robot_client.Turn(0.0, 0.0, 0.2)
+            result = self.robot_client.Move(0.0, 0.0, 0.2)
             if result != 0:
                 self.logger.error(f"Failed to turn left: {result}")
             await asyncio.sleep(1)
@@ -152,7 +152,7 @@ class BoosterT1Commander(RobotCommander):
         """Internal method that executes turn_right with the busy_lock."""
         async with self.busy_lock:
             self.logger.debug("Turning right")
-            result = self.robot_client.Turn(0.0, 0.0, -0.2)
+            result = self.robot_client.Move(0.0, 0.0, -0.2)
             if result != 0:
                 self.logger.error(f"Failed to turn right: {result}")
             await asyncio.sleep(1)
