@@ -43,7 +43,6 @@ This API provides control interface for the Booster T1 humanoid robot platform.
 The Booster T1 is a humanoid robot with the following capabilities:
 - Locomotion: Forward/backward movement and rotation
 - Hand control: Wave gestures with open/close actions
-- Speed control: Configurable movement speeds (default: 0.5 m/s forward, 0.2 m/s backward, 0.2 rad/s rotation)
 
 ## Command Queue
 
@@ -263,22 +262,22 @@ async def list_commands():
         ),
         CommandInfo(
             command="move-forward",
-            description="Move the robot forward at 0.5 m/s for 1 second",
+            description="Move the robot forward for 1 second",
             parameters=None
         ),
         CommandInfo(
             command="move-backward",
-            description="Move the robot backward at 0.2 m/s for 1 second",
+            description="Move the robot backward for 1 second",
             parameters=None
         ),
         CommandInfo(
             command="turn-left",
-            description="Rotate the robot left at 0.2 rad/s for 1 second",
+            description="Rotate the robot left for 1 second",
             parameters=None
         ),
         CommandInfo(
             command="turn-right",
-            description="Rotate the robot right at 0.2 rad/s for 1 second",
+            description="Rotate the robot right for 1 second",
             parameters=None
         ),
     ]
@@ -404,15 +403,10 @@ async def move_forward(
     Move the robot forward.
     
     **Movement Parameters:**
-    - Speed: 0.5 m/s
     - Duration: 1 second
     - Direction: Straight forward (no lateral or rotational movement)
     
     **Technical Details:**
-    - Uses robot_client.Move(0.5, 0.0, 0.0)
-    - Linear velocity: 0.5 m/s forward
-    - Lateral velocity: 0.0 m/s
-    - Angular velocity: 0.0 rad/s
     - Automatically stops after 1 second
     
     If the robot is busy, the command will be queued.
@@ -453,15 +447,10 @@ async def move_backward(
     Move the robot backward.
     
     **Movement Parameters:**
-    - Speed: 0.2 m/s (slower than forward for safety)
     - Duration: 1 second
     - Direction: Straight backward (no lateral or rotational movement)
     
     **Technical Details:**
-    - Uses robot_client.Move(-0.2, 0.0, 0.0)
-    - Linear velocity: -0.2 m/s (negative = backward)
-    - Lateral velocity: 0.0 m/s
-    - Angular velocity: 0.0 rad/s
     - Automatically stops after 1 second
     
     If the robot is busy, the command will be queued.
@@ -502,15 +491,9 @@ async def turn_left(
     Rotate the robot left (counter-clockwise).
     
     **Rotation Parameters:**
-    - Angular velocity: 0.2 rad/s counter-clockwise
     - Duration: 1 second
-    - Total rotation: ~11.5 degrees
     
     **Technical Details:**
-    - Uses robot_client.Move(0.0, 0.0, 0.2)
-    - Linear velocity: 0.0 m/s
-    - Lateral velocity: 0.0 m/s
-    - Angular velocity: 0.2 rad/s (positive = counter-clockwise)
     - Automatically stops after 1 second
     
     If the robot is busy, the command will be queued.
@@ -551,15 +534,9 @@ async def turn_right(
     Rotate the robot right (clockwise).
     
     **Rotation Parameters:**
-    - Angular velocity: 0.2 rad/s clockwise
     - Duration: 1 second
-    - Total rotation: ~11.5 degrees
     
     **Technical Details:**
-    - Uses robot_client.Move(0.0, 0.0, -0.2)
-    - Linear velocity: 0.0 m/s
-    - Lateral velocity: 0.0 m/s
-    - Angular velocity: -0.2 rad/s (negative = clockwise)
     - Automatically stops after 1 second
     
     If the robot is busy, the command will be queued.

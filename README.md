@@ -11,7 +11,6 @@ A FastAPI-based command server for controlling the Booster T1 humanoid robot. Th
 ### Robot Control
 - **Movement Commands**: Forward/backward movement and left/right rotation
 - **Hand Gestures**: Wave hand with configurable duration
-- **Speed Control**: Configurable movement speeds (0.5 m/s forward, 0.2 m/s backward, 0.2 rad/s rotation)
 
 ### API & Server
 - **RESTful API**: Clean, well-documented REST endpoints
@@ -101,12 +100,12 @@ The server will start at `http://localhost:8000`
 
 ### Movement Commands
 
-| Endpoint | Method | Description | Speed |
-|----------|--------|-------------|-------|
-| `/move-forward` | POST | Move forward for 1 second | 0.5 m/s |
-| `/move-backward` | POST | Move backward for 1 second | 0.2 m/s |
-| `/turn-left` | POST | Rotate left for 1 second | 0.2 rad/s |
-| `/turn-right` | POST | Rotate right for 1 second | 0.2 rad/s |
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/move-forward` | POST | Move forward for 1 second |
+| `/move-backward` | POST | Move backward for 1 second |
+| `/turn-left` | POST | Rotate left for 1 second |
+| `/turn-right` | POST | Rotate right for 1 second |
 
 ### Hand Gesture Commands
 
@@ -289,10 +288,6 @@ async def your_command(
 
 - **Locomotion**: Forward/backward movement and rotation
 - **Hand Control**: Wave gestures with open/close actions
-- **Movement Speeds**:
-  - Forward: 0.5 m/s
-  - Backward: 0.2 m/s (slower for safety)
-  - Rotation: 0.2 rad/s (~11.5 degrees per second)
 - **Command Duration**: All movement commands execute for 1 second by default
 - **Safety**: Automatic stop after command completion
 
@@ -302,30 +297,6 @@ async def your_command(
 - Queue size: 1 (can hold one pending command)
 - If queue is full, additional commands are skipped
 - `cancel-wave-hand` executes immediately (bypass queue)
-
-## 🔐 Security Notes
-
-### Development vs Production
-
-The default CORS configuration allows all origins:
-```python
-allow_origins=["*"]  # Development mode
-```
-
-For production, restrict to specific origins:
-```python
-allow_origins=["https://yourdomain.com"]  # Production
-```
-
-### SystemD Security Features
-
-When deployed as a systemd service, security hardening includes:
-- Non-privileged service user
-- No new privileges allowed
-- Private temporary directories
-- Protected system directories
-- Read-only system paths
-- Isolated home directory
 
 ## 🧪 Testing
 
@@ -397,19 +368,6 @@ Copyright (c) 2025 Thinkin' Rocks Oy
 - Built with [FastAPI](https://fastapi.tiangolo.com/)
 - Powered by [Uvicorn](https://www.uvicorn.org/)
 - Booster Robotics SDK for robot control
-
-## 🗺️ Roadmap
-
-### Planned Features
-- [ ] WebSocket support for real-time robot state streaming
-- [ ] Authentication and authorization
-- [ ] Multi-robot support
-- [ ] Command history and logging
-- [ ] Telemetry and metrics endpoint
-- [ ] Video streaming integration
-- [ ] Advanced movement patterns and choreography
-- [ ] Voice command integration
-- [ ] Mobile app client
 
 ## 📊 Version History
 
