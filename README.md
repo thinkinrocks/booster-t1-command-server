@@ -163,7 +163,6 @@ booster-platform/
 ├── booster-command-server/
 │   ├── main.py
 │   ├── requirements.txt
-│   ├── client.html
 │   ├── robot_commander/
 │   │   ├── __init__.py
 │   │   └── booster_t1_robot.py
@@ -173,9 +172,6 @@ booster-platform/
 │   │   ├── start_server.sh
 │   │   ├── stop_server.sh
 │   │   └── booster-command-server.service
-│   ├── README.md
-│   ├── CLIENT_README.md
-│   └── SYSTEMD_DEPLOYMENT.md
 ├── LICENSE
 └── README.md
 ```
@@ -213,12 +209,6 @@ curl -X POST http://localhost:8000/wave-hand \
   -H "Content-Type: application/json" \
   -d '{"duration": 1.5}'
 ```
-
-## Documentation
-
-- [Server Documentation](booster-command-server/README.md)
-- [Web Client Guide](booster-command-server/CLIENT_README.md)
-- [SystemD Deployment Guide](booster-command-server/SYSTEMD_DEPLOYMENT.md)
 
 ## License
 
