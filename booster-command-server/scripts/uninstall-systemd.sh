@@ -75,19 +75,6 @@ else
     echo -e "${YELLOW}✓ Log directory preserved: $LOG_DIR${NC}"
 fi
 
-# Step 5: Remove service user
-echo -e "${YELLOW}[5/6] Removing service user...${NC}"
-read -p "Do you want to remove the service user '$SERVICE_USER'? (y/N): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    if id -u $SERVICE_USER > /dev/null 2>&1; then
-        userdel $SERVICE_USER
-        echo -e "${GREEN}✓ Service user removed: $SERVICE_USER${NC}"
-    fi
-else
-    echo -e "${YELLOW}✓ Service user preserved: $SERVICE_USER${NC}"
-fi
-
 # Step 6: Complete
 echo -e "${YELLOW}[6/6] Cleaning up...${NC}"
 systemctl reset-failed
