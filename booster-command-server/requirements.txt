@@ -1,0 +1,10 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# Custom Booster SDK - install from local path or repo
+# booster-robotics-sdk-python @ file:///path/to/booster_robotics_sdk_python
+# OR for editable install:
+# -e /path/to/booster_robotics_sdk_python
+
