@@ -174,7 +174,7 @@ class RobotCommanderFactory:
         self.robot_commander = None
 
     def using_booster_t1(self) -> "RobotCommanderFactory":
-        from booster_t1_robot import BoosterT1Commander
+        from robot_commander.booster_t1_robot import BoosterT1Commander
 
         if self.robot_commander is None or not isinstance(
             self.robot_commander, BoosterT1Commander
