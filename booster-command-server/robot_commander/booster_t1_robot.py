@@ -40,7 +40,9 @@ class BoosterT1Commander(RobotCommander):
         """Internal method that executes wave_hand with the busy_lock."""
         async with self.busy_lock:
             self.logger.debug("Waving hand")
-            self.robot_client.WaveHand(B1HandAction.kHandOpen)
+            result = self.robot_client.WaveHand(B1HandAction.kHandOpen)
+            if result != 0:
+                self.logger.error(f"Failed to wave hand: {result}")
             await asyncio.sleep(parameters.get("duration", 1))
             self.cancel_wave_hand()
             self.logger.debug("Waved hand")
@@ -61,17 +63,23 @@ class BoosterT1Commander(RobotCommander):
 
     def cancel_wave_hand(self):
         self.logger.debug("Cancelling waved hand")
-        self.robot_client.WaveHand(B1HandAction.kHandClose)
+        result = self.robot_client.WaveHand(B1HandAction.kHandClose)
+        if result != 0:
+            self.logger.error(f"Failed to cancel waved hand: {result}")
 
     def _cancel_move(self):
         self.logger.debug("Cancelling move")
-        self.robot_client.Move(0.0, 0.0, 0.0)
+        result = self.robot_client.Move(0.0, 0.0, 0.0)
+        if result != 0:
+            self.logger.error(f"Failed to cancel move: {result}")
 
     async def _execute_move_forward(self, parameters: dict = {}):
         """Internal method that executes move_forward with the busy_lock."""
         async with self.busy_lock:
             self.logger.debug("Moving forward")
-            self.robot_client.Move(0.5, 0.0, 0.0)
+            result = self.robot_client.Move(0.5, 0.0, 0.0)
+            if result != 0:
+                self.logger.error(f"Failed to move forward: {result}")
             await asyncio.sleep(1)
             self._cancel_move()
             self.logger.debug("Moved forward")
@@ -94,7 +102,9 @@ class BoosterT1Commander(RobotCommander):
         """Internal method that executes move_backward with the busy_lock."""
         async with self.busy_lock:
             self.logger.debug("Moving backward")
-            self.robot_client.Move(-0.2, 0.0, 0.0)
+            result = self.robot_client.Move(-0.2, 0.0, 0.0)
+            if result != 0:
+                self.logger.error(f"Failed to move backward: {result}")
             await asyncio.sleep(1)
             self._cancel_move()
             self.logger.debug("Moved backward")
@@ -117,7 +127,9 @@ class BoosterT1Commander(RobotCommander):
         """Internal method that executes turn_left with the busy_lock."""
         async with self.busy_lock:
             self.logger.debug("Turning left")
-            self.robot_client.Turn(0.0, 0.0, 0.2)
+            result = self.robot_client.Turn(0.0, 0.0, 0.2)
+            if result != 0:
+                self.logger.error(f"Failed to turn left: {result}")
             await asyncio.sleep(1)
             self._cancel_move()
             self.logger.debug("Turned left")
@@ -140,7 +152,9 @@ class BoosterT1Commander(RobotCommander):
         """Internal method that executes turn_right with the busy_lock."""
         async with self.busy_lock:
             self.logger.debug("Turning right")
-            self.robot_client.Turn(0.0, 0.0, -0.2)
+            result = self.robot_client.Turn(0.0, 0.0, -0.2)
+            if result != 0:
+                self.logger.error(f"Failed to turn right: {result}")
             await asyncio.sleep(1)
             self._cancel_move()
             self.logger.debug("Turned right")
