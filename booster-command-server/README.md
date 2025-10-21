@@ -37,6 +37,22 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 The server will start at `http://localhost:8000`
 
+### Production Deployment (SystemD on Ubuntu)
+
+For production deployment as a systemd service on Ubuntu:
+
+```bash
+sudo ./scripts/install-systemd.sh
+```
+
+This will install the server as a system service that:
+- Starts automatically on boot
+- Runs as a dedicated service user
+- Includes automatic restart on failure
+- Provides centralized logging
+
+See [SYSTEMD_DEPLOYMENT.md](SYSTEMD_DEPLOYMENT.md) for detailed instructions.
+
 ## API Endpoints
 
 ### Root Endpoint

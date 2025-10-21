@@ -4,7 +4,8 @@
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PID_FILE="$SCRIPT_DIR/server.pid"
+PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+PID_FILE="$PROJECT_DIR/server.pid"
 
 # Check if PID file exists
 if [ ! -f "$PID_FILE" ]; then

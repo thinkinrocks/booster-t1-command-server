@@ -4,8 +4,9 @@
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PID_FILE="$SCRIPT_DIR/server.pid"
-LOG_FILE="$SCRIPT_DIR/server.log"
+PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+PID_FILE="$PROJECT_DIR/server.pid"
+LOG_FILE="$PROJECT_DIR/server.log"
 
 # Check if server is already running
 if [ -f "$PID_FILE" ]; then
@@ -19,8 +20,8 @@ if [ -f "$PID_FILE" ]; then
     fi
 fi
 
-# Change to the script directory
-cd "$SCRIPT_DIR"
+# Change to the project directory
+cd "$PROJECT_DIR"
 
 # Start the server in the background
 echo "Starting Booster Command Server..."
@@ -37,7 +38,7 @@ sleep 2
 if ps -p $SERVER_PID > /dev/null 2>&1; then
     echo "Server started successfully with PID $SERVER_PID"
     echo "Logs are being written to: $LOG_FILE"
-    echo "To stop the server, run: ./stop_server.sh"
+    echo "To stop the server, run: ./scripts/stop_server.sh"
 else
     echo "Failed to start server. Check $LOG_FILE for errors"
     rm "$PID_FILE"
