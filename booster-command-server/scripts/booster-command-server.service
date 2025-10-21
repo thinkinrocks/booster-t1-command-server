@@ -9,7 +9,7 @@ Group=booster
 WorkingDirectory=/opt/booster-command-server
 Environment="PATH=/opt/booster-command-server/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 Environment="ROBOT=mock"
-ExecStart=/opt/booster-command-server/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+ExecStart=/opt/booster-command-server/venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
 RestartSec=10
 StandardOutput=append:/var/log/booster-command-server/server.log
