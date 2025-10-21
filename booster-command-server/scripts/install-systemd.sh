@@ -70,6 +70,8 @@ echo -e "${YELLOW}[6/8] Setting permissions...${NC}"
 chown -R $SERVICE_USER:$SERVICE_GROUP "$INSTALL_DIR"
 chown -R $SERVICE_USER:$SERVICE_GROUP "$LOG_DIR"
 chmod 755 "$INSTALL_DIR"
+# Ensure venv binaries are executable
+chmod +x "$INSTALL_DIR/venv/bin/"*
 echo -e "${GREEN}✓ Permissions set${NC}"
 
 # Step 7: Install systemd service
