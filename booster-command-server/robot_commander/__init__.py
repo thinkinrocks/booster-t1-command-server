@@ -195,11 +195,11 @@ class RobotCommanderFactory:
 
     def get_robot_commander(self) -> RobotCommander:
         if self.robot_commander is not None:
-            return self
+            return self.robot_commander
         elif os.getenv("ROBOT") == "booster-t1":
-            return self.using_booster_t1()
+            return self.using_booster_t1().robot_commander
         else:
-            return self.using_mock()
+            return self.using_mock().robot_commander
 
 
 robot_commander_factory = RobotCommanderFactory(verbose=True)
