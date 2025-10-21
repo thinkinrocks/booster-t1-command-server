@@ -170,12 +170,14 @@ class MockRobotCommander(RobotCommander):
 
 class RobotCommanderFactory:
     def __init__(self, verbose: bool = False):
+        self.logger = logging.getLogger("robot-commander-factory")
         self.verbose = verbose
         self.robot_commander = None
 
     def using_booster_t1(self) -> "RobotCommanderFactory":
         from robot_commander.booster_t1_robot import BoosterT1Commander
 
+        self.logger.info("Using booster_t1 robot commander")
         if self.robot_commander is None or not isinstance(
             self.robot_commander, BoosterT1Commander
         ):
@@ -183,6 +185,7 @@ class RobotCommanderFactory:
         return self
 
     def using_mock(self) -> "RobotCommanderFactory":
+        self.logger.info("Using mock robot commander")
         if self.robot_commander is None or not isinstance(
             self.robot_commander, MockRobotCommander
         ):
@@ -192,6 +195,7 @@ class RobotCommanderFactory:
     def get_robot_commander(self) -> RobotCommander:
         if self.robot_commander is None:
             self.robot_commander = MockRobotCommander(self.verbose)
+        self.logger.info(f"Got {self.robot_commander.name()} robot commander")
         return self.robot_commander
 
 
