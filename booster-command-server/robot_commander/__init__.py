@@ -1,6 +1,7 @@
 import logging
 import asyncio
 from abc import ABC, abstractmethod
+import os
 
 
 class RobotCommander(ABC):
@@ -193,18 +194,16 @@ class RobotCommanderFactory:
         return self
 
     def get_robot_commander(self) -> RobotCommander:
-        if self.robot_commander is None:
-            self.robot_commander = MockRobotCommander(self.verbose)
-        self.logger.info(f"Got {self.robot_commander.name()} robot commander")
-        return self.robot_commander
+        if self.robot_commander is not None:
+            return self
+        elif os.getenv("ROBOT") == "booster-t1":
+            return self.using_booster_t1()
+        else:
+            return self.using_mock()
 
 
 robot_commander_factory = RobotCommanderFactory(verbose=True)
 
 
-def mock_robot_commander(verbose: bool = True) -> RobotCommander:
-    return robot_commander_factory.get_robot_commander()
-
-
-def booster_t1_robot_commander(verbose: bool = True) -> RobotCommander:
+def robot_commander() -> RobotCommander:
     return robot_commander_factory.get_robot_commander()

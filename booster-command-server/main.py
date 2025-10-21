@@ -8,7 +8,7 @@ import logging
 
 from robot_commander import (
     RobotCommander,
-    mock_robot_commander,
+    robot_commander,
     robot_commander_factory,
 )
 
@@ -93,7 +93,7 @@ async def health_check():
 @app.post("/command", response_model=CommandResponse)
 async def execute_command(
     request: CommandRequest,
-    robot_commander: Annotated[RobotCommander, Depends(mock_robot_commander)],
+    robot_commander: Annotated[RobotCommander, Depends(robot_commander)],
 ):
     """
     Execute a command based on the request
